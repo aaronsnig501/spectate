@@ -4,11 +4,17 @@ from sports.serializers import SportSerializer
 from markets.serializers import MarketSerializer
 
 
+class EventListSerializer(ModelSerializer):
+    class Meta:
+        fields = ["id", "url", "name", "start_time"]
+        model = Event
+
+
 class EventSerializer(ModelSerializer):
 
     sport = SportSerializer()
     markets = MarketSerializer()
 
     class Meta:
-        fields = "__all__"
+        fields = ["id", "url", "name", "start_time", "sport", "markets"]
         model = Event

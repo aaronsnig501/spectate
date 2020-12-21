@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Event
 from .utils import filters
-from .serializers import EventSerializer
+from .serializers import EventSerializer, EventListSerializer
 
 
 class EventsAPI(APIView):
@@ -18,5 +18,5 @@ class EventsAPI(APIView):
             serializer = self.serializer_class(event)
         else:
             events = filters(Event.objects.all(), request)
-            serializer = self.serializer_class(events, many=True)
+            serializer = EventListSerializer(events, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
