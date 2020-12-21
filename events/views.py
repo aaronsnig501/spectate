@@ -10,8 +10,12 @@ class EventsAPI(APIView):
 
     serializer_class = EventSerializer
 
-    def get(self, request, pk, **kwargs):
+    def get(self, request, pk=None, **kwargs):
         """GET request handler"""
-        event = Event.objects.get(id=pk)
-        serializer = self.serializer_class(event)
+        if pk:
+            event = Event.objects.get(id=pk)
+            serializer = self.serializer_class(event)
+        else:
+            events = Event.objects.all()
+            serializer = self.serializer_class(events, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)

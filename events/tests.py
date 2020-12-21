@@ -23,6 +23,6 @@ class EventTestCase(APITestCase):
 
         A status of 200 is returned when an ID is provided is to the matches endpoint
         """
-        url = reverse("matches", kwargs={"pk": 1})
+        url = reverse("match", kwargs={"pk": 1})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
