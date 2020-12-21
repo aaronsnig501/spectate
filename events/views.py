@@ -17,5 +17,17 @@ class EventsAPI(APIView):
             serializer = self.serializer_class(event)
         else:
             events = Event.objects.all()
+
+            # Get query strings
+            sport = request.GET.get("sport", None)
+            name = request.GET.get("name", None)
+            print(name)
+
+            # Query string filters
+            if sport is not None:
+                events = events.filter(sport__name__iexact=sport)
+            if name is not None:
+                events = events.filter(name__iexact=name)
+
             serializer = self.serializer_class(events, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
