@@ -21,7 +21,6 @@ class EventsAPI(APIView):
             # Get query strings
             sport = request.GET.get("sport", None)
             name = request.GET.get("name", None)
-            print(name)
 
             # Query string filters
             if sport is not None:
