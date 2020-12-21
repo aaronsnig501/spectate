@@ -1,12 +1,14 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from .models import Event
 from sports.serializers import SportSerializer
+from markets.serializers import MarketSerializer
 
 
-class EventSerializer(serializers.ModelSerializer):
+class EventSerializer(ModelSerializer):
 
     sport = SportSerializer()
+    markets = MarketSerializer()
 
     class Meta:
-        fields = ["id", "url", "name", "sport"]
+        fields = "__all__"
         model = Event
