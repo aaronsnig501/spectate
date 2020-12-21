@@ -8,5 +8,5 @@ class EventSerializer(serializers.ModelSerializer):
     sport = SportSerializer()
 
     class Meta:
-        fields = ["id", "name", "sport"]
+        fields = ["id", "url", "name", "sport"]
         model = Event
