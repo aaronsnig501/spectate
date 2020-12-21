@@ -4,4 +4,5 @@ from .models import Selection
 
 class SelectionSerializer(ModelSerializer):
     class Meta:
+        fields = ["id", "name", "odds"]
         model = Selection
