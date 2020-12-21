@@ -3,7 +3,7 @@ from .models import Sport
 
 
 class SportSerializer(serializers.ModelSerializer):
-    """"""
+    """Sport serializer"""
 
     class Meta:
         fields = ["id", "name"]

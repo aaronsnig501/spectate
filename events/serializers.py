@@ -1,8 +1,12 @@
 from rest_framework import serializers
 from .models import Event
+from sports.serializers import SportSerializer
 
 
-class EventSerializer(serializers.Serializer):
+class EventSerializer(serializers.ModelSerializer):
 
-    name = serializers.CharField()
-    start_time = serializers.DateTimeField()
+    sport = SportSerializer()
+
+    class Meta:
+        fields = ["id", "name", "sport"]
+        model = Event
