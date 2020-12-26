@@ -1,4 +1,12 @@
-def filters(queryset, request):
+def parse_query_params(request):
+    sport = request.GET.get("sport", None)
+    name = request.GET.get("name", None)
+    ordering = request.GET.get("ordering", None)
+
+    return sport, name, ordering
+
+
+def filter_by_params(queryset, params):
     """Filtering function
 
     Check for the existance of the `sport` and `name` query strings and filter
@@ -11,9 +19,8 @@ def filters(queryset, request):
     Returns:
         Queryset: The filtered data
     """
-    # Get query strings
-    sport = request.GET.get("sport", None)
-    name = request.GET.get("name", None)
+    sport = params[0]
+    name = params[1]
 
     # Query string filters
     if sport is not None:
