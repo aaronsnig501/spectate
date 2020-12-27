@@ -3,7 +3,10 @@
 - [Spectate](#spectate)
   - [Purpose](#purpose)
   - [User Stories](#user-stories)
-  - [Data Structure](#data-structure)
+  - [Database](#database)
+    - [Configuration](#configuration)
+    - [Structure](#structure)
+    - [Notes](#notes)
 
 ## Purpose
 The purpose of this service is to allow clients to retrieve sporting event data, create new events and update odds of existing events.
@@ -22,8 +25,18 @@ The purpose of this service is to allow clients to retrieve sporting event data,
 - As a developer I want to receive accurate error messages
 - As a developer I want to learn how to use these endpoints from the documentation
 
-## Data Structure
+## Database
+
+### Configuration
+Local development is done with SQLite3, and in MySQL in production.
+
+### Structure
 The data structure can be found [here](docs/erd/erd.pdf)
 
+### Notes
+In order to keep ID constitant if the IDs of other systems that this service will integrate with, each table has `BigIntegerField` for the primary keys, rather than the default Django auto-increment field. This is to ensure that this service doesn't end up with different IDs for events than other services, which would make it difficult to look up the same 
+events across different services.
+
+This did, however, cause an issue with Django Rest Framework as it would throw a validation error when deserializing an event that already contained an ID that already existed in the database, even when this was expected for the `UpdateOdds` behaviour.
 
 Primary Key serialization issue resolution: https://stackoverflow.com/a/63782495
