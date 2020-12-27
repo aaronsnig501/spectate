@@ -13,12 +13,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 import environ
+import dj_database_url
 
 env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, ""),
     ALLOWED_HOST=(str, "127.0.0.1"),
     CURRENT_DOMAIN=(str, "http://127.0.0.1:8000"),
+    DATABASE_URI=(str, ""),
 )
 
 environ.Env.read_env()
@@ -91,12 +93,17 @@ WSGI_APPLICATION = "spectate.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+DATABASES = {}
+
+if env("DATABASE_URI"):
+    DATABASES["default"] = dj_database_url.parse(env("DATABASE_URI"))
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
 
 
 # Password validation
