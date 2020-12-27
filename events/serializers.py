@@ -58,6 +58,7 @@ class EventSerializer(ModelSerializer):
         Returns:
             Event: The newly created `Event` instance
         """
+        id = validated_data.pop("id")
         name = validated_data.pop("name")
         start_time = validated_data.pop("start_time")
         validated_sport_data = validated_data.pop("sport")
@@ -74,7 +75,9 @@ class EventSerializer(ModelSerializer):
             for selection in validated_selection_data
         ]
 
-        event = Event(name=name, start_time=start_time, sport=sport, markets=market)
+        event = Event(
+            id=id, name=name, start_time=start_time, sport=sport, markets=market
+        )
         event.save()
         return event
 

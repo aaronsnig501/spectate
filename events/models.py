@@ -10,6 +10,7 @@ BASE_URL = f"http://{settings.ALLOWED_HOSTS[0]}:8000"
 class Event(models.Model):
     """Event model"""
 
+    id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     start_time = models.DateTimeField()
     sport = models.ForeignKey(Sport, on_delete=models.DO_NOTHING)
