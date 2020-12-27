@@ -65,7 +65,9 @@ class EventSerializer(ModelSerializer):
         validated_selection_data = validated_market_data.pop("selections")
 
         sport = Sport.objects.get(name=validated_sport_data["name"])
-        market = Market.objects.create(name=validated_market_data["name"])
+        market = Market.objects.create(
+            id=validated_market_data["id"], name=validated_market_data["name"]
+        )
 
         selections = [
             Selection.objects.create(
