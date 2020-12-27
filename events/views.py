@@ -96,6 +96,7 @@ class EventsAPI(GenericAPIView):
         else:
             params = parse_query_params(request)
             events = self.filter_queryset(self.queryset)
+            events = filter_by_params(events, params)
             serializer = EventListSerializer(events, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
