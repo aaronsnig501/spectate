@@ -31,6 +31,7 @@ class EventSerializer(ModelSerializer):
     when posting data.
     """
 
+    id = CharField(validators=[])
     sport = SportSerializer()
     markets = MarketSerializer()
     message = CharField(required=False)
@@ -39,7 +40,7 @@ class EventSerializer(ModelSerializer):
         fields = ["id", "url", "name", "start_time", "sport", "markets", "message"]
         model = Event
 
-    def create(self, validated_data):
+    def create_event(self):
         """Create Event
 
         When creating a new event we want to create a new event, with an existing sport,
@@ -57,12 +58,12 @@ class EventSerializer(ModelSerializer):
         Returns:
             Event: The newly created `Event` instance
         """
-        id = validated_data.pop("id")
-        name = validated_data.pop("name")
-        start_time = validated_data.pop("start_time")
-        validated_sport_data = validated_data.pop("sport")
+        id = self.validated_data.pop("id")
+        name = self.validated_data.pop("name")
+        start_time = self.validated_data.pop("start_time")
+        validated_sport_data = self.validated_data.pop("sport")
         validated_market_data = validated_data.pop("markets")
-        validated_selection_data = validated_market_data.pop("selections")
+        validated_selection_data = self.validated_market_data.pop("selections")
 
         sport = Sport.objects.get(name=validated_sport_data["name"])
         market = Market.objects.create(
@@ -71,7 +72,10 @@ class EventSerializer(ModelSerializer):
 
         selections = [
             Selection.objects.create(
-                name=selection["name"], odds=selection["odds"], markets=market
+                id=selection["id"],
+                name=selection["name"],
+                odds=selection["odds"],
+                markets=market,
             )
             for selection in validated_selection_data
         ]
