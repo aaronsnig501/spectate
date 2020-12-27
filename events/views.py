@@ -1,15 +1,20 @@
-from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.filters import OrderingFilter
 from .models import Event
 from .utils import filter_by_params, parse_query_params
 from .serializers import EventSerializer, EventListSerializer
 
 
-class EventsAPI(APIView):
+class EventsAPI(GenericAPIView):
     """Events API View"""
 
     serializer_class = EventSerializer
+    queryset = Event.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["start_time", "name", "id"]
+    ordering = ["-start_time"]
 
     def get(self, request, pk=None, **kwargs):
         """GET request handler
@@ -90,7 +95,7 @@ class EventsAPI(APIView):
             serializer = self.serializer_class(event)
         else:
             params = parse_query_params(request)
-            events = filter_by_params(Event.objects.all(), params)
+            events = self.filter_queryset(self.queryset)
             serializer = EventListSerializer(events, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
