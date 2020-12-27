@@ -18,7 +18,7 @@ class Event(models.Model):
 
     @property
     def url(self):
-        return f"{BASE_URL}/matches/{self.id}"
+        return f"{BASE_URL}/api/match/{self.id}"
 
     def __str__(self):
         return f"{self.name} ({self.sport.name}) - {self.start_time}"
