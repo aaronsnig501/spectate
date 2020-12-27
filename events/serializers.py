@@ -37,6 +37,7 @@ class EventSerializer(ModelSerializer):
 
     class Meta:
         fields = ["id", "url", "name", "start_time", "sport", "markets", "message"]
+        extra_kwargs = {"id": {"read_only": False}}
         model = Event
 
     def create(self, validated_data):
@@ -67,11 +68,25 @@ class EventSerializer(ModelSerializer):
         market = Market.objects.create(name=validated_market_data["name"])
 
         selections = [
-            Selection(name=selection["name"], odds=selection["odds"], markets=market)
+            Selection.objects.create(
+                name=selection["name"], odds=selection["odds"], markets=market
+            )
             for selection in validated_selection_data
         ]
-        selections = Selection.objects.bulk_create(selections)
 
         event = Event(name=name, start_time=start_time, sport=sport, markets=market)
         event.save()
         return event
+
+    def update_selections(self):
+        """Update selections
+
+        Update the odds of each selection
+        """
+        event = Event.objects.get(id=self.validated_data["id"])
+        selections = self.validated_data["markets"]["selections"]
+
+        for selection in selections:
+            event_selection = event.markets.selections.get(id=selection["id"])
+            event_selection.odds = selection["odds"]
+            event_selection.save()

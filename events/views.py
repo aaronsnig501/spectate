@@ -118,6 +118,9 @@ class EventsAPI(APIView):
         if event_serializer.is_valid():
             if event_serializer.validated_data["message"] == "NewEvent":
                 event_serializer.save()
+                return Response(event_serializer.data, status=status.HTTP_201_CREATED)
+            elif event_serializer.validated_data["message"] == "UpdateOdds":
+                event_serializer.update_selections()
+                return Response(event_serializer.data, status=status.HTTP_200_OK)
         else:
-            print(event_serializer.errors)
-        return Response({"hello": "message"})
+            return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
