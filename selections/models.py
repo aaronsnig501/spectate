@@ -4,6 +4,7 @@ from markets.models import Market
 
 class Selection(models.Model):
 
+    id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     odds = models.FloatField()
     markets = models.ForeignKey(
