@@ -37,7 +37,6 @@ class EventSerializer(ModelSerializer):
 
     class Meta:
         fields = ["id", "url", "name", "start_time", "sport", "markets", "message"]
-        extra_kwargs = {"id": {"read_only": False}}
         model = Event
 
     def create(self, validated_data):
