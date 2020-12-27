@@ -17,6 +17,7 @@ import environ
 env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, ""),
+    ALLOWED_HOST=(str, "127.0.0.1")
     CURRENT_DOMAIN=(str, "http://127.0.0.1:8000"),
 )
 
@@ -36,7 +37,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = [env("ALLOWED_HOST")]
 CURRENT_DOMAIN = env("CURRENT_DOMAIN")
 
 # Application definition
