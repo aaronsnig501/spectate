@@ -17,7 +17,7 @@ import environ
 env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, ""),
-    ALLOWED_HOST=(str, "127.0.0.1")
+    ALLOWED_HOST=(str, "127.0.0.1"),
     CURRENT_DOMAIN=(str, "http://127.0.0.1:8000"),
 )
 
