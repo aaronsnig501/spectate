@@ -1,9 +1,11 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, CharField
 from .models import Sport
 
 
-class SportSerializer(serializers.ModelSerializer):
+class SportSerializer(ModelSerializer):
     """Sport serializer"""
+
+    id = CharField(validators=[])
 
     class Meta:
         fields = ["id", "name"]
