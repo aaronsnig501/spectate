@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer, CharField
+from rest_framework.exceptions import ValidationError
 from .models import Event
 from sports.models import Sport
 from sports.serializers import SportSerializer
@@ -50,7 +51,10 @@ class EventSerializer(ModelSerializer):
         First we'll extract the data from the `validated_data` dict parameter, then get
         the correlating `Sport` and create a new `Market` with a `Selection` for each item
         in the `selections` list. This information will then be used create and save
-        the new event
+        the new event.
+
+        It will also throw a validation error if the client passes a number of selections
+        not equal to the number of `sport.number_of_participants`.
 
         Args:
             validated_data (dict): The dict implicitly passed when `.save()` is called
@@ -66,6 +70,15 @@ class EventSerializer(ModelSerializer):
         validated_selection_data = validated_market_data.pop("selections")
 
         sport = Sport.objects.get(name=validated_sport_data["name"])
+
+        if len(validated_selection_data) != sport.number_of_participants:
+            raise ValidationError(
+                (
+                    f"{sport.name} requires {sport.number_of_participants} participants."
+                    f"You have provided {len(validated_selection_data)}"
+                )
+            )
+
         market = Market.objects.create(
             id=validated_market_data["id"], name=validated_market_data["name"]
         )

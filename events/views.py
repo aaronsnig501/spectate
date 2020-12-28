@@ -2,6 +2,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.filters import OrderingFilter
+from rest_framework.exceptions import ValidationError
 from .models import Event
 from .utils import filter_by_params, parse_query_params
 from .serializers import EventSerializer, EventListSerializer
@@ -142,7 +143,12 @@ class EventsAPI(GenericAPIView):
 
         if event_serializer.is_valid():
             if event_serializer.validated_data["message"] == "NewEvent":
-                event_serializer.save()
+                try:
+                    event_serializer.save()
+                except ValidationError as e:
+                    return Response(
+                        data={"message": e.detail}, status=status.HTTP_400_BAD_REQUEST
+                    )
                 return Response(event_serializer.data, status=status.HTTP_201_CREATED)
             elif event_serializer.validated_data["message"] == "UpdateOdds":
                 event_serializer.update_selections()
