@@ -47,7 +47,6 @@ class EventTestCase(APITestCase):
         A status of 201 is returned when an event is posted with a message of `NewEvent`
         and the new event is also returned
         """
-        url = reverse("matches")
         response = self.client.post(self.url, EVENT_TO_BE_CREATED, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(int(response.data["id"]), EVENT_TO_BE_CREATED["id"])
@@ -61,7 +60,6 @@ class EventTestCase(APITestCase):
         A status of 400 is return when attempting POST without providing a `message`
         field along with the appropriate error message
         """
-        url = reverse("matches")
         response = self.client.post(self.url, EVENT_WITH_NO_MESSAGE, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data["message"][0], "This field is required.")
@@ -75,7 +73,6 @@ class EventTestCase(APITestCase):
         A status of 400 is return when attempting POST without providing a `message` field
         along with the appropriate error message
         """
-        url = reverse("matches")
         response = self.client.post(self.url, EVENT_WITH_UNKNOWN_MESSAGE, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
@@ -92,9 +89,8 @@ class EventTestCase(APITestCase):
         A status of 400 is returned when trying to create an event that already exists
         with an appropriate error message
         """
-        url = reverse("matches")
         response = self.client.post(self.url, EVENT_TO_BE_CREATED, format="json")
-        second_response = self.client.post(url, DUPLICATE_EVENT, format="json")
+        second_response = self.client.post(self.url, DUPLICATE_EVENT, format="json")
         self.assertEqual(second_response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             second_response.data["message"][0],
