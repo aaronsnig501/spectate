@@ -102,9 +102,6 @@ class EventTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(int(response.data["id"]), EVENT_TO_BE_CREATED["id"])
 
-        # Clean up to ensure that this error doesn't fire sporatically
-        Event.objects.get(id=EVENT_TO_BE_CREATED["id"]).delete()
-
     def test_post_doesnt_create_a_new_event_if_message_isnt_present(self):
         """POST new event isn't created without a message field
 
@@ -118,11 +115,11 @@ class EventTestCase(APITestCase):
             Event.DoesNotExist, Event.objects.get, id=EVENT_WITH_NO_MESSAGE["id"]
         )
 
-    def test_post_doesnt_create_a_new_event_if_message_isnt_present(self):
-        """POST new event isn't created without a message field
+    def test_post_doesnt_create_a_new_event_if_message_unknown(self):
+        """POST new event isn't created if the message field has an unknown value
 
-        A status of 400 is return when attempting POST without providing a `message` field
-        along with the appropriate error message
+        A status of 400 is return when attempting POST without providing a valid
+        `message` field along with the appropriate error message
         """
         response = self.client.post(self.url, EVENT_WITH_UNKNOWN_MESSAGE, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
