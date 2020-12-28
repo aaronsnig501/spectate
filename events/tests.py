@@ -16,6 +16,7 @@ from sports.models import Sport
 
 class EventTestCase(APITestCase):
     fixtures = ["events.json"]
+    url = reverse("matches")
 
     def test_get_match_by_id(self):
         """GET match by ID
@@ -34,8 +35,7 @@ class EventTestCase(APITestCase):
         A status of 200 is returned when the matches endpoint is called without
         parameters, and the correct number of events are returned
         """
-        url = reverse("matches")
-        response = self.client.get(url)
+        response = self.client.get(self.url)
 
         events_count = Event.objects.all().count()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -48,7 +48,7 @@ class EventTestCase(APITestCase):
         and the new event is also returned
         """
         url = reverse("matches")
-        response = self.client.post(url, EVENT_TO_BE_CREATED, format="json")
+        response = self.client.post(self.url, EVENT_TO_BE_CREATED, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(int(response.data["id"]), EVENT_TO_BE_CREATED["id"])
 
@@ -58,14 +58,32 @@ class EventTestCase(APITestCase):
     def test_post_doesnt_create_a_new_event_if_message_isnt_present(self):
         """POST new event isn't created without a message field
 
-        A status of 400 is return when attempting POST without providing a `message` field
-        along with the appropriate error message"""
+        A status of 400 is return when attempting POST without providing a `message`
+        field along with the appropriate error message
+        """
         url = reverse("matches")
-        response = self.client.post(url, EVENT_WITH_NO_MESSAGE, format="json")
+        response = self.client.post(self.url, EVENT_WITH_NO_MESSAGE, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data["message"][0], "This field is required.")
         self.assertRaises(
             Event.DoesNotExist, Event.objects.get, id=EVENT_WITH_NO_MESSAGE["id"]
+        )
+
+    def test_post_doesnt_create_a_new_event_if_message_isnt_present(self):
+        """POST new event isn't created without a message field
+
+        A status of 400 is return when attempting POST without providing a `message` field
+        along with the appropriate error message
+        """
+        url = reverse("matches")
+        response = self.client.post(self.url, EVENT_WITH_UNKNOWN_MESSAGE, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.data["message"],
+            "Unknown message. Try again with either `NewEvent` or `UpdateOdds`",
+        )
+        self.assertRaises(
+            Event.DoesNotExist, Event.objects.get, id=EVENT_WITH_UNKNOWN_MESSAGE["id"]
         )
 
     def test_post_doesnt_create_duplicate_events(self):
@@ -75,7 +93,7 @@ class EventTestCase(APITestCase):
         with an appropriate error message
         """
         url = reverse("matches")
-        response = self.client.post(url, EVENT_TO_BE_CREATED, format="json")
+        response = self.client.post(self.url, EVENT_TO_BE_CREATED, format="json")
         second_response = self.client.post(url, DUPLICATE_EVENT, format="json")
         self.assertEqual(second_response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
