@@ -8,15 +8,7 @@ from sports.models import Sport
 
 
 class EventTestCase(APITestCase):
-    def setUp(self):
-        """Create a new match event"""
-        sport = Sport(name="Football")
-        sport.save()
-
-        event = Event(
-            name="Real Madrid vs Barcelona", start_time=datetime.now(), sport=sport
-        )
-        event.save()
+    fixtures = ["events.json"]
 
     def test_get_match_by_id(self):
         """Test get match by ID

@@ -1,0 +1,726 @@
+[
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2020-12-27T02:23:47.248Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "221",
+        "object_repr": "Football",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2020-12-27T18:43:52.063Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "8661032861909884120",
+        "object_repr": "Barcelona vs Real Madrid (Football) - 2020-12-25 22:03:30+00:00",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 4,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 5,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 6,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add event",
+        "content_type": 7,
+        "codename": "add_event"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change event",
+        "content_type": 7,
+        "codename": "change_event"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete event",
+        "content_type": 7,
+        "codename": "delete_event"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view event",
+        "content_type": 7,
+        "codename": "view_event"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add sport",
+        "content_type": 8,
+        "codename": "add_sport"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change sport",
+        "content_type": 8,
+        "codename": "change_sport"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete sport",
+        "content_type": 8,
+        "codename": "delete_sport"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view sport",
+        "content_type": 8,
+        "codename": "view_sport"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add market",
+        "content_type": 9,
+        "codename": "add_market"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change market",
+        "content_type": 9,
+        "codename": "change_market"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete market",
+        "content_type": 9,
+        "codename": "delete_market"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view market",
+        "content_type": 9,
+        "codename": "view_market"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add selection",
+        "content_type": 10,
+        "codename": "add_selection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change selection",
+        "content_type": 10,
+        "codename": "change_selection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete selection",
+        "content_type": 10,
+        "codename": "delete_selection"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view selection",
+        "content_type": 10,
+        "codename": "view_selection"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$216000$1rkDCsoLX77h$zSxm06TUYv9/PZmmumOjReXgIyuMuxWVPI3faNpLlLI=",
+        "last_login": "2020-12-27T02:22:33.192Z",
+        "is_superuser": true,
+        "username": "aaron",
+        "first_name": "",
+        "last_name": "",
+        "email": "aaronsnig@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-12-27T02:22:15.496Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "events",
+        "model": "event"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "sports",
+        "model": "sport"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "markets",
+        "model": "market"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "selections",
+        "model": "selection"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "lz46a8uwqjjvs2l4fo7c3i7zho1v2unw",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hAYBgou3fcMZOiMUjVtUtqV8e7apAvd_vfef6lM21rz1mTJI6uzsur0uxUaHjLtgO803WY9zNO6jEXvij5o0_3M8rwc7t9BpVa_9VUgYpd8wJBs4IAiAF0UdIgGIAobMsGBdwUAnCVIZWCMCI7JF6_eH6qdNno:1ktLhZ:k92MsGpF1JtuomFJaQIjZ9iVjukM9Gs9tjNo0H49LyY",
+        "expire_date": "2021-01-10T02:22:33.758Z"
+    }
+},
+{
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+        "name": "Real Madrid vs Barcelona",
+        "start_time": "2020-12-21T22:03:30Z",
+        "sport": 221,
+        "markets": 1
+    }
+},
+{
+    "model": "events.event",
+    "pk": 8661032861904884120,
+    "fields": {
+        "name": "Real Madrid vs Barcelona",
+        "start_time": "2020-12-25T22:03:30Z",
+        "sport": 221,
+        "markets": 385086549340973310
+    }
+},
+{
+    "model": "events.event",
+    "pk": 8661032861909884120,
+    "fields": {
+        "name": "Barcelona vs Real Madrid",
+        "start_time": "2020-12-25T22:03:30Z",
+        "sport": 221,
+        "markets": 385086549360973310
+    }
+},
+{
+    "model": "events.event",
+    "pk": 8661032861909884220,
+    "fields": {
+        "name": "Real Madrid vs Barcelona",
+        "start_time": "2020-12-21T22:03:30Z",
+        "sport": 221,
+        "markets": 385086549360973390
+    }
+},
+{
+    "model": "events.event",
+    "pk": 8661032861909884222,
+    "fields": {
+        "name": "Real Madrid vs Barcelona",
+        "start_time": "2020-12-21T22:03:30Z",
+        "sport": 221,
+        "markets": 385086549360973391
+    }
+},
+{
+    "model": "sports.sport",
+    "pk": 221,
+    "fields": {
+        "name": "Football",
+        "number_of_participants": 2
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 1,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385026129304373310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385026129330473310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385026129340473310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385026529340473310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385086529340473310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385086549340973310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385086549360973310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385086549360973390,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385086549360973391,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 385086549360973395,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "markets.market",
+    "pk": 3850261293304373310,
+    "fields": {
+        "name": "Winner"
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 1,
+    "fields": {
+        "name": "Real Madrid",
+        "odds": 10.0,
+        "markets": 1
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 2,
+    "fields": {
+        "name": "Barcelona",
+        "odds": 5.55,
+        "markets": 1
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 5737666848266640777,
+    "fields": {
+        "name": "Barcelona",
+        "odds": 5.55,
+        "markets": 385086549340973310
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 5737666888266640777,
+    "fields": {
+        "name": "Barcelona",
+        "odds": 5.55,
+        "markets": 385086549360973310
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 5737666888266680774,
+    "fields": {
+        "name": "Barcelona",
+        "odds": 5.55,
+        "markets": 385086549360973391
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 5737666888266680777,
+    "fields": {
+        "name": "Barcelona",
+        "odds": 5.55,
+        "markets": 385086549360973390
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 8243901714083342528,
+    "fields": {
+        "name": "Real Madrid",
+        "odds": 10.0,
+        "markets": 385086549360973310
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 8243901714083343527,
+    "fields": {
+        "name": "Real Madrid",
+        "odds": 10.0,
+        "markets": 385086549360973391
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 8243901714083343528,
+    "fields": {
+        "name": "Real Madrid",
+        "odds": 10.0,
+        "markets": 385086549360973390
+    }
+},
+{
+    "model": "selections.selection",
+    "pk": 8243904714083342528,
+    "fields": {
+        "name": "Real Madrid",
+        "odds": 10.0,
+        "markets": 385086549340973310
+    }
+}
+]
