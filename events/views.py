@@ -111,13 +111,32 @@ class EventsAPI(GenericAPIView):
             `NewEvent`: Indicates that a new event is to be created
             `UpdateOdds`: Indicates that the odds on an events selections are to be
                           updated
-        
+
         Example Usage:
-            curl -X POST http://127.0.0.1:8000/api/match/ \
-                -d '{"message":"NewEvent","name": "Real Madrid vs Barcelona", \
-                "startTime": "2020-12-21T22:03:30Z", "sport": {"id": 1, "name": "Football"}, \
-                "markets": {"id": 1, "name": "Winner", "selections": [{"id": 1, "name": "Real Madrid",\
-                "odds": 10},{"id": 2, "name": "Barcelona", "odds": 5.55}]}}
+            curl -X POST -H "Content-type: application/json" http://127.0.0.1:8000/api/match/ -d \
+                '{
+                    "id": 1,
+                    "message":"NewEvent",
+                    "name": "Real Madrid vs Barcelona",
+                    "startTime": "2020-12-21T22:03:30Z",
+                    "sport": {"id": 1, "name": "Football"},
+                    "markets": {
+                        "id": 1,
+                        "name": "Winner",
+                        "selections": [
+                            {
+                                "id": 1,
+                                "name": "Real Madrid",
+                                "odds": 10
+                            },
+                            {
+                                "id": 2,
+                                "name": "Barcelona",
+                                "odds": 5.55
+                            }
+                        ]
+                    }
+                }'
         """
         event_serializer = self.serializer_class(data=request.data)
 
