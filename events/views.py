@@ -92,8 +92,14 @@ class EventsAPI(GenericAPIView):
 
         """
         if pk:
-            event = Event.objects.get(id=pk)
-            serializer = self.serializer_class(event)
+            try:
+                event = Event.objects.get(id=pk)
+                serializer = self.serializer_class(event)
+            except Event.DoesNotExist:
+                return Response(
+                    {"message": f"Event with ID of {pk} not found"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
         else:
             params = parse_query_params(request)
             events = self.filter_queryset(self.queryset)
