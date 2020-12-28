@@ -69,6 +69,14 @@ class EventSerializer(ModelSerializer):
         validated_market_data = validated_data.pop("markets")
         validated_selection_data = validated_market_data.pop("selections")
 
+        if (
+            validated_data.pop("message") == "NewEvent"
+            and Event.objects.filter(id=id).exists()
+        ):
+            raise ValidationError(
+                f"Event with ID {id} already exists. Try updating the odds"
+            )
+
         sport = Sport.objects.get(name=validated_sport_data["name"])
 
         if len(validated_selection_data) != sport.number_of_participants:
