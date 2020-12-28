@@ -29,6 +29,17 @@ class EventTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(int(response.data["id"]), 1)
 
+    def test_get_match_by_invalid_id(self):
+        """GET match by nonexistent ID
+
+        A status of 400 is returned when an invalid ID is provided is to the matches
+        endpoint, as well as the appropriate error message
+        """
+        url = reverse("match", kwargs={"pk": 2})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.data["message"], "Event with ID of 2 not found")
+
     def test_get_all_matches(self):
         """GET all matches
 
@@ -40,6 +51,46 @@ class EventTestCase(APITestCase):
         events_count = Event.objects.all().count()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), events_count)
+
+    def test_get_events_filtered_by_name(self):
+        """GET event filtered by event name
+
+        A status of 200 is returned when the endpoint is called with a name parameter
+        that finds a match in the database and returns the correct amount of events
+        """
+        response = self.client.get(self.url, {"name": "Barcelona vs Real Madrid"})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
+    def test_get_events_filtered_by_invalid_name(self):
+        """GET event filtered by event name
+
+        A status of 200 is returned when the endpoint is called with a name parameter
+        that doesn't find an event
+        """
+        response = self.client.get(self.url, {"name": "Barcelona vs Real Mrid"})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
+
+    def test_get_events_filtered_by_sport_name(self):
+        """GET event filtered by sport name
+
+        A status of 200 is returned when the endpoint is called with a sport name parameter
+        that finds a match in the database and returns the correct amount of events
+        """
+        response = self.client.get(self.url, {"sport": "Football"})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 5)
+
+    def test_get_events_filtered_by_invalid_sport_name(self):
+        """GET event filtered by sport name
+
+        A status of 200 is returned when the endpoint is called with a sport name parameter
+        that doesn't find an event
+        """
+        response = self.client.get(self.url, {"sport": "Ftball"})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
 
     def test_post_creates_new_event(self):
         """POST new event
