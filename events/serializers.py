@@ -35,7 +35,7 @@ class EventSerializer(ModelSerializer):
     id = CharField(validators=[])
     sport = SportSerializer()
     markets = MarketSerializer()
-    message = CharField(required=False)
+    message = CharField(write_only=True)
 
     class Meta:
         fields = ["id", "url", "name", "start_time", "sport", "markets", "message"]
