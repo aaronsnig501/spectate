@@ -41,6 +41,12 @@ class EventSerializer(ModelSerializer):
         fields = "__all__"
         model = Event
 
+    def message_type_is_valid(self, message):
+        if not (message == "NewEvent" or message == "UpdateOdds"):
+            return False
+        else:
+            return True
+
     def can_proceed_to_create_event(self, message, id):
         if message == "NewEvent" and Event.objects.filter(id=id).exists():
             return False
@@ -110,6 +116,11 @@ class EventSerializer(ModelSerializer):
         validated_selection_data = self.get_validated_selection_data(
             validated_market_data
         )
+
+        if not self.message_type_is_valid(message):
+            raise ValidationError(
+                "Unknown message. Try again with either `NewEvent` or `UpdateOdds`"
+            )
 
         sport = Sport.objects.get(name=validated_sport_data["name"])
         markets = Market.objects.filter(sport=sport)

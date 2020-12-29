@@ -148,24 +148,17 @@ class EventsAPI(GenericAPIView):
         event_serializer = self.serializer_class(data=request.data)
 
         if event_serializer.is_valid():
-            if event_serializer.validated_data["message"] == "NewEvent":
-                try:
-                    event_serializer.save()
-                except ValidationError as e:
-                    return Response(
-                        data={"message": e.detail}, status=status.HTTP_400_BAD_REQUEST
-                    )
-                return Response(event_serializer.data, status=status.HTTP_201_CREATED)
-            elif event_serializer.validated_data["message"] == "UpdateOdds":
+            try:
                 event = event_serializer.save()
-                updated_event = self.serializer_class(event)
-                return Response(updated_event.data, status=status.HTTP_200_OK)
-            else:
-                message = (
-                    "Unknown message. Try again with either `NewEvent` or `UpdateOdds`"
-                )
+                saved_event = self.serializer_class(event)
+                if event_serializer.validated_data["message"] == "NewEvent":
+                    http_status = status.HTTP_201_CREATED
+                else:
+                    http_status = status.HTTP_200_OK
+                return Response(saved_event.data, status=http_status)
+            except ValidationError as e:
                 return Response(
-                    data={"message": message}, status=status.HTTP_400_BAD_REQUEST
+                    data={"message": e.detail}, status=status.HTTP_400_BAD_REQUEST
                 )
         else:
             return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
