@@ -13,6 +13,7 @@
     - [Notes](#notes-1)
   - [Documentation](#documentation)
   - [Testing](#testing)
+  - [Local Development](#local-development)
 
 ## Purpose
 The purpose of this service is to allow clients to retrieve sporting event data, create new events and update odds of existing events.
@@ -77,3 +78,23 @@ The API is documented using the default configuration for [django-yasg](https://
 ## Testing
 Automated testing was performed for both happy and unhappy paths to ensure that both, the correct information is returned, and also that error handling is effective and thorough. Testing was also performed through the browsable API and [Postman](docs/postman/Spectate.postman_collection.json).
 
+## Local Development
+In order to get this running locally, ensure that you have **SQLite**, **Python 3** and **virtualenv** installed and run the following commands:
+
+```bash
+git clone https://github.com/aaronsnig501/spectate.git
+cd spectate
+virtualenv env
+. env/bin/activate
+```
+
+After this, you'll need to update add environment variables to the `.env` file, and from there run
+```bash
+python manage.py migrate
+python manage.py createsuperuser # For any testing purposes
+python manage.py runserver
+```
+
+In order to post any events you'll need to create a new `Sport` in the admin, and once that's ready you'll be able create new events.
+
+Lastly, tests can be run using `python manage.py test`. Test fixtures are provided in `events/fixtures`
