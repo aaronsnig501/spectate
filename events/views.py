@@ -157,8 +157,9 @@ class EventsAPI(GenericAPIView):
                     )
                 return Response(event_serializer.data, status=status.HTTP_201_CREATED)
             elif event_serializer.validated_data["message"] == "UpdateOdds":
-                event_serializer.update_selections()
-                return Response(event_serializer.data, status=status.HTTP_200_OK)
+                event = event_serializer.save()
+                updated_event = self.serializer_class(event)
+                return Response(updated_event.data, status=status.HTTP_200_OK)
             else:
                 message = (
                     "Unknown message. Try again with either `NewEvent` or `UpdateOdds`"

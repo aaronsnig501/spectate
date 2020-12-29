@@ -71,9 +71,9 @@ class EventSerializer(ModelSerializer):
                     "sport": sport,
                 },
             )
-            if not len(market_data["selections"]) >= sport.number_of_participants:
+            if not len(market_data["selections"]) > sport.number_of_participants:
                 for selection in market_data["selections"]:
-                    Selection.objects.create(
+                    selection = Selection.objects.create(
                         id=selection["id"],
                         name=selection["name"],
                         odds=selection["odds"],
@@ -114,6 +114,14 @@ class EventSerializer(ModelSerializer):
         sport = Sport.objects.get(name=validated_sport_data["name"])
         markets = Market.objects.filter(sport=sport)
 
+        if message == "UpdateOdds":
+            for selection in validated_selection_data:
+                event_selection = Selection.objects.get(id=selection["id"])
+                event_selection.odds = selection["odds"]
+                event_selection.save()
+
+            return Event.objects.get(id=id)
+
         if not self.can_proceed_to_create_event(message, id):
             raise ValidationError(
                 f"Event with ID {id} already exists. Try updating the odds"
@@ -136,16 +144,3 @@ class EventSerializer(ModelSerializer):
         event = Event(id=id, name=name, start_time=start_time, sport=sport)
         event.save()
         return event
-
-    def update_selections(self):
-        """Update selections
-
-        Update the odds of each selection
-        """
-        event = Event.objects.get(id=self.validated_data["id"])
-        selections = self.validated_data["markets"]["selections"]
-
-        for selection in selections:
-            event_selection = event.markets.selections.get(id=selection["id"])
-            event_selection.odds = selection["odds"]
-            event_selection.save()

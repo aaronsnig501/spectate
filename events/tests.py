@@ -144,3 +144,22 @@ class EventTestCase(APITestCase):
             second_response.data["message"][0],
             f"Event with ID {DUPLICATE_EVENT['id']} already exists. Try updating the odds",
         )
+
+    def test_update_odds(self):
+        """POST updates odds with a message of `UpdateOdds`
+
+        A status of 200 is returned when trying to edit the odds of an event that exists
+        and the updated object
+        """
+        response = self.client.post(self.url, EVENT_TO_BE_CREATED, format="json")
+        update_response = self.client.post(self.url, EVENT_TO_UPDATE, format="json")
+
+        updated_event = Event.objects.get(id=int(EVENT_TO_UPDATE["id"]))
+
+        self.assertEqual(update_response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            float(update_response.data["markets"][1]["selections"][-2]["odds"]), 10.00
+        )
+        self.assertEqual(
+            float(update_response.data["markets"][1]["selections"][-1]["odds"]), 5.55
+        )
