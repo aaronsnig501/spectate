@@ -18,7 +18,7 @@
 			"id": "9a69895d-3931-eadb-ac3c-f38da5fad911",
 			"headers": "",
 			"headerData": [],
-			"url": "http://ec2-3-250-80-154.eu-west-1.compute.amazonaws.com/api/match/6",
+			"url": "http://ec2-3-250-80-154.eu-west-1.compute.amazonaws.com/api/match/8661032232038284220",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -29,7 +29,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1609281508666,
+			"time": 1609283248606,
 			"name": "GET Event Deatils",
 			"description": "",
 			"collectionId": "293c4007-bb78-4205-be72-1f0df997727b",
@@ -78,12 +78,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1609281539454,
+			"time": 1609283221173,
 			"name": "POST Create Event",
 			"description": "",
 			"collectionId": "293c4007-bb78-4205-be72-1f0df997727b",
 			"responses": [],
-			"rawModeData": "{\n\t\"id\": 8661032232038284220,\n\t\"message\":\"NewEvent\",\n    \"name\": \"Barcelona vs Real Madrid\",\n    \"startTime\": \"2020-12-22T22:03:30Z\",\n    \"sport\": {\n        \"id\": 221,\n        \"name\": \"Football\"\n    },\n    \"markets\": [\n    \t{\n\t        \"id\": 38502612934373310,\n\t        \"name\": \"Winner\",\n\t        \"selections\": [\n\t            {\n\t                \"id\": 824190224340832228,\n\t                \"name\": \"Real Madrid\",\n\t                \"odds\": 1.01\n\t            },\n\t            {\n\t                \"id\": 8241922343408224528,\n\t                \"name\": \"Barcelona\",\n\t                \"odds\": 1.01\n\t            }\n\t        ]\n\t    }\n    ]\n}"
+			"rawModeData": "{\n\t\"id\": 8661032232038284220,\n\t\"messageType\":\"NewEvent\",\n    \"name\": \"Barcelona vs Real Madrid\",\n    \"startTime\": \"2020-12-22T22:03:30Z\",\n    \"sport\": {\n        \"id\": 221,\n        \"name\": \"Football\"\n    },\n    \"markets\": [\n    \t{\n\t        \"id\": 38502612934373310,\n\t        \"name\": \"Winner\",\n\t        \"selections\": [\n\t            {\n\t                \"id\": 824190224340832228,\n\t                \"name\": \"Real Madrid\",\n\t                \"odds\": 1.01\n\t            },\n\t            {\n\t                \"id\": 8241922343408224528,\n\t                \"name\": \"Barcelona\",\n\t                \"odds\": 1.01\n\t            }\n\t        ]\n\t    }\n    ]\n}"
 		},
 		{
 			"id": "c73c0a99-f519-7fb3-ff6c-e0b8f8b69c9e",
@@ -107,12 +107,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1609281521730,
+			"time": 1609283225636,
 			"name": "POST Update Odds",
 			"description": "",
 			"collectionId": "293c4007-bb78-4205-be72-1f0df997727b",
 			"responses": [],
-			"rawModeData": "{\n\t\"id\": 8661032232038284220,\n\t\"message\":\"UpdateOdds\",\n    \"name\": \"Real Madrid vs Barcelona\",\n    \"startTime\": \"2020-12-21T22:03:30Z\",\n    \"sport\": {\n        \"id\": 1,\n        \"name\": \"Football\"\n    },\n    \"markets\": [\n    \t{\n\t        \"id\": 385086549360973391,\n\t        \"name\": \"Winner\",\n\t        \"selections\": [\n\t            {\n\t                \"id\": 8243901714083343527,\n\t                \"name\": \"Real Madrid\",\n\t                \"odds\": 1\n\t            },\n\t            {\n\t                \"id\": 5737666888266680774,\n\t                \"name\": \"Barcelona\",\n\t                \"odds\": 5.55\n\t            }\n\t        ]\n\t    }\n    ]\n}"
+			"rawModeData": "{\n\t\"id\": 8661032232038284220,\n\t\"messageType\":\"UpdateOdds\",\n    \"name\": \"Real Madrid vs Barcelona\",\n    \"startTime\": \"2020-12-21T22:03:30Z\",\n    \"sport\": {\n        \"id\": 1,\n        \"name\": \"Football\"\n    },\n    \"markets\": [\n    \t{\n\t        \"id\": 385086549360973391,\n\t        \"name\": \"Winner\",\n\t        \"selections\": [\n\t            {\n\t                \"id\": 8243901714083343527,\n\t                \"name\": \"Real Madrid\",\n\t                \"odds\": 1\n\t            },\n\t            {\n\t                \"id\": 5737666888266680774,\n\t                \"name\": \"Barcelona\",\n\t                \"odds\": 5.55\n\t            }\n\t        ]\n\t    }\n    ]\n}"
 		}
 	]
 }
