@@ -110,7 +110,7 @@ class EventTestCase(APITestCase):
         """
         response = self.client.post(self.url, EVENT_WITH_NO_MESSAGE, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["message"][0], "This field is required.")
+        self.assertEqual(response.data["message_type"][0], "This field is required.")
         self.assertRaises(
             Event.DoesNotExist, Event.objects.get, id=EVENT_WITH_NO_MESSAGE["id"]
         )
@@ -125,7 +125,7 @@ class EventTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.data["message"][0],
-            "Unknown message. Try again with either `NewEvent` or `UpdateOdds`",
+            "Unknown message_type. Try again with either `NewEvent` or `UpdateOdds`",
         )
         self.assertRaises(
             Event.DoesNotExist, Event.objects.get, id=EVENT_WITH_UNKNOWN_MESSAGE["id"]

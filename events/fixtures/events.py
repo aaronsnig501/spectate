@@ -1,5 +1,5 @@
 EVENT_TO_BE_CREATED = {
-    "message": "NewEvent",
+    "message_type": "NewEvent",
     "id": 8622032232038284220,
     "name": "Real Madrid vs Barcelona",
     "startTime": "2018-06-20 10:30:00",
@@ -17,7 +17,7 @@ EVENT_TO_BE_CREATED = {
 }
 
 DUPLICATE_EVENT = {
-    "message": "NewEvent",
+    "message_type": "NewEvent",
     "id": 8622032232038284220,
     "name": "Real Madrid vs Barcelona",
     "startTime": "2018-06-20 10:30:00",
@@ -36,7 +36,7 @@ DUPLICATE_EVENT = {
 
 
 EVENT_TO_UPDATE = {
-    "message": "UpdateOdds",
+    "message_type": "UpdateOdds",
     "id": 8622032232038284220,
     "name": "Real Madrid vs Barcelona",
     "startTime": "2018-06-20 10:30:00",
@@ -71,7 +71,7 @@ EVENT_WITH_NO_MESSAGE = {
 }
 
 EVENT_WITH_UNKNOWN_MESSAGE = {
-    "message": "UnknownMessage",
+    "message_type": "UnknownMessage",
     "id": 994839351740,
     "name": "Real Madrid vs Barcelona",
     "startTime": "2018-06-20 10:30:00",

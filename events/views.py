@@ -123,7 +123,7 @@ class EventsAPI(GenericAPIView):
             curl -X POST -H "Content-type: application/json" http://127.0.0.1:8000/api/match/ -d \
                 '{
                     "id": 1,
-                    "message":"NewEvent",
+                    "message_type":"NewEvent",
                     "name": "Real Madrid vs Barcelona",
                     "startTime": "2020-12-21T22:03:30Z",
                     "sport": {"id": 1, "name": "Football"},
@@ -151,7 +151,7 @@ class EventsAPI(GenericAPIView):
             try:
                 event = event_serializer.save()
                 saved_event = self.serializer_class(event)
-                if event_serializer.validated_data["message"] == "NewEvent":
+                if event_serializer.validated_data["message_type"] == "NewEvent":
                     http_status = status.HTTP_201_CREATED
                 else:
                     http_status = status.HTTP_200_OK

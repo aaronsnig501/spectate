@@ -35,20 +35,20 @@ class EventSerializer(ModelSerializer):
     id = CharField(validators=[])
     sport = SportSerializer()
     markets = MarketSerializer(many=True, required=False)
-    message = CharField(write_only=True)
+    message_type = CharField(write_only=True)
 
     class Meta:
         fields = "__all__"
         model = Event
 
-    def message_type_is_valid(self, message):
-        if not (message == "NewEvent" or message == "UpdateOdds"):
+    def message_type_is_valid(self, message_type):
+        if not (message_type == "NewEvent" or message_type == "UpdateOdds"):
             return False
         else:
             return True
 
-    def can_proceed_to_create_event(self, message, id):
-        if message == "NewEvent" and Event.objects.filter(id=id).exists():
+    def can_proceed_to_create_event(self, message_type, id):
+        if message_type == "NewEvent" and Event.objects.filter(id=id).exists():
             return False
         else:
             return True
@@ -110,22 +110,22 @@ class EventSerializer(ModelSerializer):
         id = validated_data.pop("id")
         name = validated_data.pop("name")
         start_time = validated_data.pop("start_time")
-        message = validated_data.pop("message")
+        message_type = validated_data.pop("message_type")
         validated_sport_data = validated_data.pop("sport")
         validated_market_data = validated_data.pop("markets")
         validated_selection_data = self.get_validated_selection_data(
             validated_market_data
         )
 
-        if not self.message_type_is_valid(message):
+        if not self.message_type_is_valid(message_type):
             raise ValidationError(
-                "Unknown message. Try again with either `NewEvent` or `UpdateOdds`"
+                "Unknown message_type. Try again with either `NewEvent` or `UpdateOdds`"
             )
 
         sport = Sport.objects.get(name=validated_sport_data["name"])
         markets = Market.objects.filter(sport=sport)
 
-        if message == "UpdateOdds":
+        if message_type == "UpdateOdds":
             for selection in validated_selection_data:
                 event_selection = Selection.objects.get(id=selection["id"])
                 event_selection.odds = selection["odds"]
@@ -133,7 +133,7 @@ class EventSerializer(ModelSerializer):
 
             return Event.objects.get(id=id)
 
-        if not self.can_proceed_to_create_event(message, id):
+        if not self.can_proceed_to_create_event(message_type, id):
             raise ValidationError(
                 f"Event with ID {id} already exists. Try updating the odds"
             )
