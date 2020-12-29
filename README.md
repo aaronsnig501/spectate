@@ -7,7 +7,12 @@
     - [Configuration](#configuration)
     - [Structure](#structure)
     - [Notes](#notes)
-  - [Environments](#environments)
+  - [Deployment](#deployment)
+    - [Environments](#environments)
+  - [Code Standards](#code-standards)
+    - [Notes](#notes-1)
+  - [Documentation](#documentation)
+  - [Testing](#testing)
 
 ## Purpose
 The purpose of this service is to allow clients to retrieve sporting event data, create new events and update odds of existing events.
@@ -42,8 +47,12 @@ This did, however, cause an issue with Django Rest Framework as it would throw a
 
 [Primary Key serialization issue resolution](https://stackoverflow.com/a/63782495)
 
-## Environments
-Spectate is hosted on EC2, with a MySQL database running on RDS. Environment management is handled by `django-environ` which loads in the environment variables from the `.env` file in the `spectate` app. This repository contains a `.env.example` as an example of what type of information is required. The main settings used are as follows:
+
+## Deployment
+
+Spectate is hosted on EC2, with a MySQL database running on RDS using Apache. The base URL is [here](http://ec2-3-250-80-154.eu-west-1.compute.amazonaws.com/api/match/).
+### Environments
+Environment management is handled by `django-environ` which loads in the environment variables from the `.env` file in the `spectate` app. This repository contains a `.env.example` as an example of what type of information is required. The main settings used are as follows:
 - `DEBUG` (default: `False`)
   - The `DEBUG` value will default to `False`, make sure to set `DEBUG=on` when using development
 - `SECRET_KEY` (default: `""`)
@@ -54,3 +63,17 @@ Spectate is hosted on EC2, with a MySQL database running on RDS. Environment man
   - Used to provided the full URL to the event. Defaults to `http://127.0.0.1:8000`
 - `DATABASE_URI` (default: `""`)
   - The URI of the database to be used. If this is not provided, Django's default SQLite configuration will be used
+
+
+## Code Standards
+Code is formatted used Black with its default configuration. As a result, code will likely not pass normal PEP8 validation, specifically regarding line lengths.
+
+### Notes
+The field `start_time`, is written in standard PEP8 snake case formatting, however, the specification called for camel case (`startTime`). I have used [djangorestframework-camel-case](https://github.com/vbabiy/djangorestframework-camel-case) to render the field in the camel casing, which is the standard in languages like JS. This causes a slight inconsistency when using the `ordering` param to sort results. In order to sort results, the URL must be called with `ordering=start_time`, rather than `ordering=startTime`. I searched for a solution for this, however I was unable to find a straightforward answer.
+
+## Documentation
+The API is documented using the default configuration for [django-yasg](https://github.com/axnsan12/drf-yasg) using both Swagger and ReDoc. As the service is developed using Django Rest Framework, the API is [browsable](http://ec2-3-250-80-154.eu-west-1.compute.amazonaws.com/api/match/) by default, so most actions can be tested from here, however, [Swagger](http://ec2-3-250-80-154.eu-west-1.compute.amazonaws.com/swagger/) and [ReDoc](http://ec2-3-250-80-154.eu-west-1.compute.amazonaws.com/redoc/) documentation is also available.
+
+## Testing
+Automated testing was performed for both happy and unhappy paths to ensure that both, the correct information is returned, and also that error handling is effective and thorough. Testing was also performed through the browsable API and [Postman](docs/postman/Spectate.postman_collection.json).
+
