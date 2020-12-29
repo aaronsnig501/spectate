@@ -3,7 +3,7 @@
     "model": "admin.logentry",
     "pk": 1,
     "fields": {
-        "action_time": "2020-12-27T02:23:47.248Z",
+        "action_time": "2020-12-29T17:33:56.856Z",
         "user": 1,
         "content_type": 8,
         "object_id": "221",
@@ -16,13 +16,52 @@
     "model": "admin.logentry",
     "pk": 2,
     "fields": {
-        "action_time": "2020-12-27T18:43:52.063Z",
+        "action_time": "2020-12-29T17:44:13.150Z",
         "user": 1,
-        "content_type": 7,
-        "object_id": "8661032861909884120",
-        "object_repr": "Barcelona vs Real Madrid (Football) - 2020-12-25 22:03:30+00:00",
+        "content_type": 8,
+        "object_id": "221",
+        "object_repr": "Football",
         "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+        "change_message": "[{\"changed\": {\"fields\": [\"Number of participants\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2020-12-29T18:40:09.346Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "8241922343408224528",
+        "object_repr": "Barcelona (1.01)",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2020-12-29T18:40:09.562Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "8241902243408344528",
+        "object_repr": "Real Madrid (1.01)",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2020-12-29T18:40:09.842Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "824190224340832228",
+        "object_repr": "Real Madrid (1.01)",
+        "action_flag": 3,
+        "change_message": ""
     }
 },
 {
@@ -389,8 +428,8 @@
     "model": "auth.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$216000$1rkDCsoLX77h$zSxm06TUYv9/PZmmumOjReXgIyuMuxWVPI3faNpLlLI=",
-        "last_login": "2020-12-27T02:22:33.192Z",
+        "password": "pbkdf2_sha256$216000$Z7e9DLe27Z9D$e7/D01UJiS7dB1iGzcv8QSN/qHecQ7sES4YB/9sI3t0=",
+        "last_login": "2020-12-29T17:33:45.908Z",
         "is_superuser": true,
         "username": "aaron",
         "first_name": "",
@@ -398,7 +437,7 @@
         "email": "aaronsnig@gmail.com",
         "is_staff": true,
         "is_active": true,
-        "date_joined": "2020-12-27T02:22:15.496Z",
+        "date_joined": "2020-12-29T17:33:19.571Z",
         "groups": [],
         "user_permissions": []
     }
@@ -485,60 +524,28 @@
 },
 {
     "model": "sessions.session",
-    "pk": "lz46a8uwqjjvs2l4fo7c3i7zho1v2unw",
+    "pk": "7s0eshxunnyujfd4kn7kxnaipofegclx",
     "fields": {
-        "session_data": ".eJxVjEEOwiAQRe_C2hAYBgou3fcMZOiMUjVtUtqV8e7apAvd_vfef6lM21rz1mTJI6uzsur0uxUaHjLtgO803WY9zNO6jEXvij5o0_3M8rwc7t9BpVa_9VUgYpd8wJBs4IAiAF0UdIgGIAobMsGBdwUAnCVIZWCMCI7JF6_eH6qdNno:1ktLhZ:k92MsGpF1JtuomFJaQIjZ9iVjukM9Gs9tjNo0H49LyY",
-        "expire_date": "2021-01-10T02:22:33.758Z"
+        "session_data": ".eJxVjEEOwiAQRe_C2pAyFaa4dN8zNDAzSNVAUtqV8e7apAvd_vfef6kpbGuetibLNLO6KKNOv1sM9JCyA76HcquaalmXOepd0Qdteqwsz-vh_h3k0PK39tAHTBFw8B0OZ4dsmU1PiWx0BhxiEiYU79haD2CSEZM68CjkhEi9P9U8N_E:1kuIsU:54Fz6j8YF9a-PgWlk1cRVa4CsTbJZfKymY1nPo-chG0",
+        "expire_date": "2021-01-12T17:33:46.172Z"
     }
 },
 {
     "model": "events.event",
-    "pk": 1,
-    "fields": {
-        "name": "Real Madrid vs Barcelona",
-        "start_time": "2020-12-21T22:03:30Z",
-        "sport": 221,
-        "markets": 1
-    }
-},
-{
-    "model": "events.event",
-    "pk": 8661032861904884120,
-    "fields": {
-        "name": "Real Madrid vs Barcelona",
-        "start_time": "2020-12-25T22:03:30Z",
-        "sport": 221,
-        "markets": 385086549340973310
-    }
-},
-{
-    "model": "events.event",
-    "pk": 8661032861909884120,
+    "pk": 8661032232038284220,
     "fields": {
         "name": "Barcelona vs Real Madrid",
-        "start_time": "2020-12-25T22:03:30Z",
-        "sport": 221,
-        "markets": 385086549360973310
+        "start_time": "2020-12-22T22:03:30Z",
+        "sport": 221
     }
 },
 {
     "model": "events.event",
-    "pk": 8661032861909884220,
+    "pk": 8661032832038284120,
     "fields": {
-        "name": "Real Madrid vs Barcelona",
-        "start_time": "2020-12-21T22:03:30Z",
-        "sport": 221,
-        "markets": 385086549360973390
-    }
-},
-{
-    "model": "events.event",
-    "pk": 8661032861909884222,
-    "fields": {
-        "name": "Real Madrid vs Barcelona",
-        "start_time": "2020-12-21T22:03:30Z",
-        "sport": 221,
-        "markets": 385086549360973391
+        "name": "Barcelona vs Real Madrid",
+        "start_time": "2020-12-22T22:03:30Z",
+        "sport": 221
     }
 },
 {
@@ -551,176 +558,28 @@
 },
 {
     "model": "markets.market",
-    "pk": 1,
+    "pk": 38502612934373310,
     "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385026129304373310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385026129330473310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385026129340473310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385026529340473310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385086529340473310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385086549340973310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385086549360973310,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385086549360973390,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385086549360973391,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 385086549360973395,
-    "fields": {
-        "name": "Winner"
-    }
-},
-{
-    "model": "markets.market",
-    "pk": 3850261293304373310,
-    "fields": {
-        "name": "Winner"
+        "name": "Winner",
+        "sport": 221
     }
 },
 {
     "model": "selections.selection",
-    "pk": 1,
+    "pk": 8241904343408344528,
     "fields": {
         "name": "Real Madrid",
-        "odds": 10.0,
-        "markets": 1
+        "odds": 1.01,
+        "markets": 38502612934373310
     }
 },
 {
     "model": "selections.selection",
-    "pk": 2,
+    "pk": 8241922343408344528,
     "fields": {
         "name": "Barcelona",
-        "odds": 5.55,
-        "markets": 1
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 5737666848266640777,
-    "fields": {
-        "name": "Barcelona",
-        "odds": 5.55,
-        "markets": 385086549340973310
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 5737666888266640777,
-    "fields": {
-        "name": "Barcelona",
-        "odds": 5.55,
-        "markets": 385086549360973310
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 5737666888266680774,
-    "fields": {
-        "name": "Barcelona",
-        "odds": 5.55,
-        "markets": 385086549360973391
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 5737666888266680777,
-    "fields": {
-        "name": "Barcelona",
-        "odds": 5.55,
-        "markets": 385086549360973390
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 8243901714083342528,
-    "fields": {
-        "name": "Real Madrid",
-        "odds": 10.0,
-        "markets": 385086549360973310
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 8243901714083343527,
-    "fields": {
-        "name": "Real Madrid",
-        "odds": 10.0,
-        "markets": 385086549360973391
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 8243901714083343528,
-    "fields": {
-        "name": "Real Madrid",
-        "odds": 10.0,
-        "markets": 385086549360973390
-    }
-},
-{
-    "model": "selections.selection",
-    "pk": 8243904714083342528,
-    "fields": {
-        "name": "Real Madrid",
-        "odds": 10.0,
-        "markets": 385086549340973310
+        "odds": 1.01,
+        "markets": 38502612934373310
     }
 }
 ]

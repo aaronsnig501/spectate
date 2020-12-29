@@ -11,7 +11,6 @@ class Event(models.Model):
     name = models.CharField(max_length=255)
     start_time = models.DateTimeField()
     sport = models.ForeignKey(Sport, on_delete=models.DO_NOTHING)
-    markets = models.ForeignKey(Market, on_delete=models.DO_NOTHING)
 
     @property
     def url(self):

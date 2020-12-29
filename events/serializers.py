@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, CharField
+from rest_framework.serializers import Serializer, ModelSerializer, CharField
 from rest_framework.exceptions import ValidationError
 from .models import Event
 from sports.models import Sport
@@ -34,12 +34,51 @@ class EventSerializer(ModelSerializer):
 
     id = CharField(validators=[])
     sport = SportSerializer()
-    markets = MarketSerializer()
+    markets = MarketSerializer(many=True, required=False)
     message = CharField(write_only=True)
 
     class Meta:
-        fields = ["id", "url", "name", "start_time", "sport", "markets", "message"]
+        fields = "__all__"
         model = Event
+
+    def can_proceed_to_create_event(self, message, id):
+        if message == "NewEvent" and Event.objects.filter(id=id).exists():
+            return False
+        else:
+            return True
+
+    def selection_is_invalid(self, data, participants):
+        return len(data) != participants
+
+    def to_representation(self, instance):
+        data = super(EventSerializer, self).to_representation(instance)
+        data["markets"] = MarketSerializer(instance.sport.markets.all(), many=True).data
+        return data
+
+    def get_validated_selection_data(self, market):
+        validated_selection_data = [
+            selection for market in market for selection in market["selections"]
+        ]
+        return validated_selection_data
+
+    def get_or_create_markets_with_selections(self, market_data, sport):
+        for market_data in market_data:
+            market, _ = Market.objects.get_or_create(
+                id=market_data["id"],
+                defaults={
+                    "id": market_data["id"],
+                    "name": market_data["name"],
+                    "sport": sport,
+                },
+            )
+            if not len(market_data["selections"]) >= sport.number_of_participants:
+                for selection in market_data["selections"]:
+                    Selection.objects.create(
+                        id=selection["id"],
+                        name=selection["name"],
+                        odds=selection["odds"],
+                        markets=market,
+                    )
 
     def create(self, validated_data):
         """Create Event
@@ -65,21 +104,24 @@ class EventSerializer(ModelSerializer):
         id = validated_data.pop("id")
         name = validated_data.pop("name")
         start_time = validated_data.pop("start_time")
+        message = validated_data.pop("message")
         validated_sport_data = validated_data.pop("sport")
         validated_market_data = validated_data.pop("markets")
-        validated_selection_data = validated_market_data.pop("selections")
+        validated_selection_data = self.get_validated_selection_data(
+            validated_market_data
+        )
 
-        if (
-            validated_data.pop("message") == "NewEvent"
-            and Event.objects.filter(id=id).exists()
-        ):
+        sport = Sport.objects.get(name=validated_sport_data["name"])
+        markets = Market.objects.filter(sport=sport)
+
+        if not self.can_proceed_to_create_event(message, id):
             raise ValidationError(
                 f"Event with ID {id} already exists. Try updating the odds"
             )
 
-        sport = Sport.objects.get(name=validated_sport_data["name"])
-
-        if len(validated_selection_data) != sport.number_of_participants:
+        if self.selection_is_invalid(
+            validated_selection_data, sport.number_of_participants
+        ):
             raise ValidationError(
                 (
                     f"{sport.name} requires {sport.number_of_participants} participants."
@@ -87,23 +129,11 @@ class EventSerializer(ModelSerializer):
                 )
             )
 
-        market = Market.objects.create(
-            id=validated_market_data["id"], name=validated_market_data["name"]
+        markets = self.get_or_create_markets_with_selections(
+            validated_market_data, sport
         )
 
-        selections = [
-            Selection.objects.create(
-                id=selection["id"],
-                name=selection["name"],
-                odds=selection["odds"],
-                markets=market,
-            )
-            for selection in validated_selection_data
-        ]
-
-        event = Event(
-            id=id, name=name, start_time=start_time, sport=sport, markets=market
-        )
+        event = Event(id=id, name=name, start_time=start_time, sport=sport)
         event.save()
         return event
 

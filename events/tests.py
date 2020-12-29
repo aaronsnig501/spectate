@@ -24,10 +24,10 @@ class EventTestCase(APITestCase):
         A status of 200 is returned when an ID is provided is to the matches endpoint,
         as well as the correct event
         """
-        url = reverse("match", kwargs={"pk": 1})
+        url = reverse("match", kwargs={"pk": 8661032232038284220})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(int(response.data["id"]), 1)
+        self.assertEqual(int(response.data["id"]), 8661032232038284220)
 
     def test_get_match_by_invalid_id(self):
         """GET match by nonexistent ID
@@ -60,7 +60,7 @@ class EventTestCase(APITestCase):
         """
         response = self.client.get(self.url, {"name": "Barcelona vs Real Madrid"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 2)
 
     def test_get_events_filtered_by_invalid_name(self):
         """GET event filtered by event name
@@ -80,7 +80,7 @@ class EventTestCase(APITestCase):
         """
         response = self.client.get(self.url, {"sport": "Football"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 5)
+        self.assertEqual(len(response.data), 2)
 
     def test_get_events_filtered_by_invalid_sport_name(self):
         """GET event filtered by sport name
@@ -142,5 +142,5 @@ class EventTestCase(APITestCase):
         self.assertEqual(second_response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             second_response.data["message"][0],
-            "Event with ID 994839351740 already exists. Try updating the odds",
+            f"Event with ID {DUPLICATE_EVENT['id']} already exists. Try updating the odds",
         )
