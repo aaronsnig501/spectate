@@ -42,32 +42,97 @@ class EventSerializer(ModelSerializer):
         model = Event
 
     def message_type_is_valid(self, message_type):
+        """Message type is invalid
+
+        A small helper method to ensure that the `message_type` has a message of either
+        "NewEvent" or "UpdateOdds"
+
+        Args:
+            message_type (str): The message_type provided by the client
+
+        Returns:
+            bool: True if message_type is "NewEvent" or "UpdateOdds". Otherwise False.
+        """
         if not (message_type == "NewEvent" or message_type == "UpdateOdds"):
             return False
         else:
             return True
 
     def can_proceed_to_create_event(self, message_type, id):
+        """Can proceed to create event
+
+        Ensures that the incoming data has a `message_type` of "NewEvent" and doesn't
+        already exist in the database
+
+        Args:
+            message_type (str): The `message_type` provided by the client
+            id (int): The `id` of the event provided by the client
+
+        Returns:
+            bool: True if message is "NewEvent" and the Event doesn't already exist.
+                  Otherwise False
+        """
         if message_type == "NewEvent" and Event.objects.filter(id=id).exists():
             return False
         else:
             return True
 
     def selection_is_invalid(self, data, participants):
+        """Selection is invalid
+
+        A simple helper method used to determine if the data coming from the client
+        contains the correct number of participants for that sport
+
+        Args:
+            data (Selection): The Selection to be validated
+            participants (int): The number of participants allowed
+
+        Returns:
+            bool: False if the length of data not equal to the number of participants.
+                  Otherwise True
+        """
         return len(data) != participants
 
     def to_representation(self, instance):
+        """To representation
+
+        Override the default representation to retrieve all of the markets for sport
+        of the current event.
+        """
         data = super(EventSerializer, self).to_representation(instance)
         data["markets"] = MarketSerializer(instance.sport.markets.all(), many=True).data
         return data
 
     def get_validated_selection_data(self, market):
+        """Get validated selection data
+
+        Helper method to retrieve all of the selections provided by the client
+
+        Args:
+            market (list): The validated market data
+
+        Returns:
+            list: The validated selections
+        """
         validated_selection_data = [
             selection for market in market for selection in market["selections"]
         ]
         return validated_selection_data
 
     def get_or_create_markets_with_selections(self, market_data, sport):
+        """Get or create markets with selections
+
+        If a specific market doesn't exist then it will need to be created, as it will
+        need to be referenced when creating the selections. This will create the market
+        for every market provide, along with its selections.
+
+        If the markets already exist then they will just be retrieved from the database
+        as normal.
+
+        Args:
+            market_data (list): The validated market data
+            sport (Sport): The instance of the sport object
+        """
         for market_data in market_data:
             market, _ = Market.objects.get_or_create(
                 id=market_data["id"],
@@ -77,14 +142,13 @@ class EventSerializer(ModelSerializer):
                     "sport": sport,
                 },
             )
-            if not len(market_data["selections"]) > sport.number_of_participants:
-                for selection in market_data["selections"]:
-                    selection = Selection.objects.create(
-                        id=selection["id"],
-                        name=selection["name"],
-                        odds=selection["odds"],
-                        markets=market,
-                    )
+            for selection in market_data["selections"]:
+                selection = Selection.objects.create(
+                    id=selection["id"],
+                    name=selection["name"],
+                    odds=selection["odds"],
+                    markets=market,
+                )
 
     def create(self, validated_data):
         """Create Event
